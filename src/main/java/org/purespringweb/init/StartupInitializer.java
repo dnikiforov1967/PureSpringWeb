@@ -5,31 +5,28 @@
  */
 package org.purespringweb.init;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
+import org.purespringweb.config.RootConfig;
 import org.purespringweb.config.WebAppConfig;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  *
  * @author dnikiforov
  */
-public class StartupInitializer implements WebApplicationInitializer {
+public class StartupInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
-    public void onStartup(ServletContext servletCxt) {
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[] { RootConfig.class };
+    }
 
-        // Load Spring web application configuration
-        AnnotationConfigWebApplicationContext ac = new AnnotationConfigWebApplicationContext();
-        ac.register(WebAppConfig.class);
-        ac.refresh();
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[] { WebAppConfig.class };
+    }
 
-        // Create and register the DispatcherServlet
-        DispatcherServlet servlet = new DispatcherServlet(ac);
-        ServletRegistration.Dynamic registration = servletCxt.addServlet("app", servlet);
-        registration.setLoadOnStartup(1);
-        registration.addMapping("/app/*");
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] { "/app/*" };
     }
 }
