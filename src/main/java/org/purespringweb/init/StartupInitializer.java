@@ -15,6 +15,11 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 public class StartupInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+	@Override
+	protected String getServletName() {
+		return "PureSpring";
+	}
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[] { RootConfig.class };
