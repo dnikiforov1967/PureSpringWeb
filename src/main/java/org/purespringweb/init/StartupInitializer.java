@@ -32,6 +32,6 @@ public class StartupInitializer extends AbstractAnnotationConfigDispatcherServle
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] { "/app/*" };
+        return new String[] { "/" };
     }
 }
