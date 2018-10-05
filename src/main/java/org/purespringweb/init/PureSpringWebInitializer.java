@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import org.purespringweb.config.RootConfig;
 import org.purespringweb.config.WebAppConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -21,8 +23,8 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 public class PureSpringWebInitializer implements WebApplicationInitializer {
 
-	private WebApplicationContext createRootApplicationContext() {
-		final AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+	private ApplicationContext createRootApplicationContext() {
+		final AnnotationConfigApplicationContext rootContext = new AnnotationConfigApplicationContext();
 		rootContext.register(RootConfig.class);
 		rootContext.refresh();
 		return rootContext;
@@ -31,7 +33,7 @@ public class PureSpringWebInitializer implements WebApplicationInitializer {
 	private WebApplicationContext createWebApplicationContext() {
 		final AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
 		webContext.register(WebAppConfig.class);
-		final WebApplicationContext root = createRootApplicationContext();
+		final ApplicationContext root = createRootApplicationContext();
 		webContext.setParent(root);
 		//DO NOT DO REFRESH - it's DispatcherServlet responsibility
 		return webContext;
