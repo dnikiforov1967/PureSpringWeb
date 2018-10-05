@@ -6,7 +6,6 @@ package org.purespringweb.test;
  * and open the template in the editor.
  */
 import javax.servlet.ServletContext;
-import javax.ws.rs.core.MediaType;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,6 +17,7 @@ import org.purespringweb.config.RootConfig;
 import org.purespringweb.config.WebAppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
