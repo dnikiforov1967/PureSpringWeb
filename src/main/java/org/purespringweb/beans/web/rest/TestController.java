@@ -5,30 +5,43 @@
  */
 package org.purespringweb.beans.web.rest;
 
-import java.util.Set;
-import org.purespringweb.beans.root.core.interfaces.FileHandlerInterface;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.purespringweb.pojo.impl.Dog;
+import org.purespringweb.pojo.interfaces.Animal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
  * @author dnikiforov
  */
 @Controller
-@RequestMapping("/hello")
-public class WelcomeController {
-	
-	@Autowired
-	private FileHandlerInterface fileHandler;
-	
-	@RequestMapping(method = RequestMethod.GET)
+@RequestMapping("/test")
+public class TestController {
+
+	/**
+	 * Method handles normal welcome request
+	 * 
+	 * @param model
+	 * @return 
+	 */
+	@GetMapping(path="/welcome")
 	public String makeHelloResponse(ModelMap model) {
-		final Set<String> namesOfFiles = fileHandler.namesOfFiles("/root", "zoo");
-		final String name = namesOfFiles.iterator().next();
-		model.addAttribute("nameOfResponder", name);
+		model.addAttribute("nameOfResponder", "Stranger");
 		return "welcome";
+	}	
+	
+	@GetMapping(path="/create/{type}")
+	@ResponseBody
+	public Animal createAnimal(@PathVariable("type") String type) {
+		if ("dog".equals(type)) {
+			return new Dog();
+		} else {
+			return null;
+		}
 	}
+	
 }
