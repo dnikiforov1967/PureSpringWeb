@@ -5,6 +5,7 @@
  */
 package org.purespringweb.beans.web.rest;
 
+import org.purespringweb.pojo.exception.NotFoundSuchTypeException;
 import org.purespringweb.pojo.impl.Dog;
 import org.purespringweb.pojo.interfaces.Animal;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class TestController {
 		if ("dog".equals(type)) {
 			return new Dog();
 		} else {
-			return null;
+			throw new NotFoundSuchTypeException();
 		}
 	}
 	
