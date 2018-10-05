@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -89,9 +89,9 @@ public class TestControllerUnitTest {
 	
 	@Test
 	public void dogTest() throws Exception {
-		this.mockMvc.perform(get("/test/create/dog").accept(MediaType.APPLICATION_JSON))
+		this.mockMvc.perform(post("/test/create/dog").accept(MediaType.APPLICATION_JSON))
 			.andDo(print())
-			.andExpect(status().isOk())
+			.andExpect(status().isCreated())
 			.andExpect(content().string("{\"type\":\"Canis\"}"));		
 	}
 
