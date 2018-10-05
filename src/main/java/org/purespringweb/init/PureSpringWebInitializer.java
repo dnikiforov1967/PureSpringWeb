@@ -51,9 +51,9 @@ public class PureSpringWebInitializer implements WebApplicationInitializer {
 		//DispatcherServlet initialization
 		//In this case we do not needed ContextLoaderListener - as we do not required
 		WebApplicationContext web = createWebApplicationContext();
+		final DispatcherServlet dispatcherServlet = new DispatcherServlet(web);
 		
-        ServletRegistration.Dynamic appServlet = 
-          sc.addServlet("mvc", new DispatcherServlet(web));
+        ServletRegistration.Dynamic appServlet = sc.addServlet("mvc", dispatcherServlet);
 		appServlet.addMapping("/app/*");
         appServlet.setLoadOnStartup(1);
 
