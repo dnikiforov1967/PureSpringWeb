@@ -6,6 +6,7 @@
 package org.purespringweb.beans.web.rest;
 
 import org.purespringweb.pojo.exception.NotFoundSuchTypeException;
+import org.purespringweb.pojo.impl.Account;
 import org.purespringweb.pojo.impl.Dog;
 import org.purespringweb.pojo.interfaces.Animal;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,12 @@ public class TestController {
     public String makeHelloResponseWMA2(@ModelAttribute("name") String name, ModelMap model) {
         model.addAttribute("nameOfResponder", name);
         return "welcome";
+    }
+    
+    @GetMapping(path = "/account/{account}")
+    @ResponseBody
+    public Account makeAccountResponse(@ModelAttribute("account") Account account) {
+        return account;
     }    
     
     @PostMapping(path = "/create/{type}")
