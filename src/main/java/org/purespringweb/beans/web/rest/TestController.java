@@ -36,7 +36,12 @@ public class TestController {
 	public String makeHelloResponse(ModelMap model) {
 		model.addAttribute("nameOfResponder", "Stranger");
 		return "welcome";
-	}	
+	}
+        
+	@GetMapping(path="/toparrot")
+	public String makeRedirectToParrot() {
+		return "redirect:/parrot.jsp";
+	}        
 	
 	@PostMapping(path="/create/{type}")
 	@ResponseBody
