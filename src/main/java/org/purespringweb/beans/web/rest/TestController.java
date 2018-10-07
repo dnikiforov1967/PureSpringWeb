@@ -82,6 +82,18 @@ public class TestController {
         model.addObject("firstname", firstname);
         model.addObject("lastname", lastname);
         return model;
+    }
+    
+    @GetMapping(path = "/acceptQuery")
+    public ModelAndView makeAcceptQueryResponse(
+            @RequestParam("firstname") String firstname,
+            @RequestParam("lastname") String lastname
+            ) {
+        final ModelAndView model = new ModelAndView();
+        model.setViewName("acceptuser");
+        model.addObject("firstname", firstname);
+        model.addObject("lastname", lastname);
+        return model;
     }    
     
     @PostMapping(path = "/create/{type}")
