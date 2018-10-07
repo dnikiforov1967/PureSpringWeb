@@ -65,9 +65,9 @@ public class TestController {
     }    
     
     @GetMapping(path = "/complexaccount/{account}")
-    @ResponseBody
-    public ComplexAccount makeComplexAccountResponse(@ModelAttribute("account") ComplexAccount account) {
-        return account;
+    //@ResponseBody
+    public String makeComplexAccountResponse(@ModelAttribute("account") ComplexAccount account) {
+        return "showaccount";
     }    
     
     @PostMapping(path = "/create/{type}")
