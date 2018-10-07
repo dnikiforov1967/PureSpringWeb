@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -68,6 +70,18 @@ public class TestController {
     //@ResponseBody
     public String makeComplexAccountResponse(@ModelAttribute("account") ComplexAccount account) {
         return "showaccount";
+    }    
+    
+    @PostMapping(path = "/accept")
+    public ModelAndView makeAcceptResponse(
+            @RequestParam("firstname") String firstname,
+            @RequestParam("lastname") String lastname
+            ) {
+        final ModelAndView model = new ModelAndView();
+        model.setViewName("acceptuser");
+        model.addObject("firstname", firstname);
+        model.addObject("lastname", lastname);
+        return model;
     }    
     
     @PostMapping(path = "/create/{type}")
