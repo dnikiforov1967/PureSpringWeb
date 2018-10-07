@@ -7,6 +7,7 @@ package org.purespringweb.beans.web.rest;
 
 import org.purespringweb.pojo.exception.NotFoundSuchTypeException;
 import org.purespringweb.pojo.impl.Account;
+import org.purespringweb.pojo.impl.ComplexAccount;
 import org.purespringweb.pojo.impl.Dog;
 import org.purespringweb.pojo.interfaces.Animal;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,12 @@ public class TestController {
     @GetMapping(path = "/account/{account}")
     @ResponseBody
     public Account makeAccountResponse(@ModelAttribute("account") Account account) {
+        return account;
+    }    
+    
+    @GetMapping(path = "/complexaccount/{account}")
+    @ResponseBody
+    public ComplexAccount makeComplexAccountResponse(@ModelAttribute("account") ComplexAccount account) {
         return account;
     }    
     
