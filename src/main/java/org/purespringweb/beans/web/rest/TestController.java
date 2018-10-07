@@ -5,6 +5,8 @@
  */
 package org.purespringweb.beans.web.rest;
 
+import java.io.File;
+import java.io.IOException;
 import org.purespringweb.pojo.exception.NotFoundSuchTypeException;
 import org.purespringweb.pojo.impl.Account;
 import org.purespringweb.pojo.impl.ComplexAccount;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -93,6 +96,20 @@ public class TestController {
         model.setViewName("acceptuser");
         model.addObject("firstname", firstname);
         model.addObject("lastname", lastname);
+        return model;
+    }
+    
+    @PostMapping(path = "/acceptfile")
+    public ModelAndView makeAcceptFileResponse(
+            @RequestParam("filename") String filename,
+            @RequestParam("myfile") MultipartFile file
+            ) throws IOException {
+        final ModelAndView model = new ModelAndView();
+        final String originalFilename = file.getOriginalFilename();
+        file.transferTo(new File("/home/dima/storage/"+originalFilename));
+        model.addObject("name", filename);
+        model.addObject("filename", originalFilename);
+        model.setViewName("showfile");
         return model;
     }    
     

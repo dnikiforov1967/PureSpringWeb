@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>File ${filename}</h1>
+        <h1>File ${filename}, titled ${name}</h1>
     </body>
 </html>
