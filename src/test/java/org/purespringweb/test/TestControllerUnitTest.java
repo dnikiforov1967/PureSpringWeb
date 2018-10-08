@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.purespringweb.config.RootConfig;
 import org.purespringweb.config.WebAppConfig;
+import org.purespringweb.pojo.exception.NotFoundSuchTypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
@@ -98,6 +99,22 @@ public class TestControllerUnitTest {
 	@Test
 	public void catTest() throws Exception {
 		this.mockMvc.perform(post("/test/create/cat").accept(MediaType.APPLICATION_JSON))
+			.andDo(print())
+			.andExpect(status().isNotFound())
+			.andExpect(status().reason("Data have not been found"));		
+	}
+
+	@Test
+	public void dogSecondTest() throws Exception {
+		this.mockMvc.perform(post("/secondtest/create/dog").accept(MediaType.APPLICATION_JSON))
+			.andDo(print())
+			.andExpect(status().isCreated())
+			.andExpect(content().string("{\"type\":\"Canis\"}"));		
+	}
+
+	@Test(expected = org.springframework.web.util.NestedServletException.class)
+	public void catSecondTest() throws Exception {
+		this.mockMvc.perform(post("/secondtest/create/cat").accept(MediaType.APPLICATION_JSON))
 			.andDo(print())
 			.andExpect(status().isNotFound())
 			.andExpect(status().reason("Data have not been found"));		
