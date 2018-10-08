@@ -10,5 +10,12 @@ package org.purespringweb.pojo.exception;
  * @author dnikiforov
  */
 public class NotFoundSuchTypeException extends RuntimeException {
+
+	public NotFoundSuchTypeException() {
+	}
+
+	public NotFoundSuchTypeException(String msg) {
+		super(msg);
+	}
 	
 }

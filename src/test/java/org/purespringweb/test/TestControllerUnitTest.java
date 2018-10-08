@@ -23,12 +23,16 @@ import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -94,5 +98,14 @@ public class TestControllerUnitTest {
 			.andExpect(status().isCreated())
 			.andExpect(content().string("{\"type\":\"Canis\"}"));		
 	}
+	
+	@Test
+	public void catTest() throws Exception {
+		final ResultActions perform = this.mockMvc.perform(post("/test/create/cat").accept(MediaType.APPLICATION_JSON));
+		perform
+			.andDo(print())
+			.andExpect(status().isNotFound())
+			.andExpect(forwardedUrl("/WEB-INF/views/error.jsp"));
+	}	
 
 }
