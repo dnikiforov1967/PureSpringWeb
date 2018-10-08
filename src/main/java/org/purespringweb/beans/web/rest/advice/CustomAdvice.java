@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author dnikiforov
  */
-@ControllerAdvice()
+@ControllerAdvice(annotations = {AdviceOnException.class})
 public class CustomAdvice {
 	
 	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason = "Data have not been found")

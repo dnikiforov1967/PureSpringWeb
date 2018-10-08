@@ -5,6 +5,7 @@
  */
 package org.purespringweb.beans.web.rest;
 
+import org.purespringweb.pojo.annotation.AdviceOnException;
 import org.purespringweb.pojo.exception.NotFoundSuchTypeException;
 import org.purespringweb.pojo.impl.Account;
 import org.purespringweb.pojo.impl.ComplexAccount;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/test")
+@AdviceOnException
 public class TestController {
     
     /**
