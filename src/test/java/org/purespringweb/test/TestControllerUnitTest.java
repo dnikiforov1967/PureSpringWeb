@@ -94,5 +94,13 @@ public class TestControllerUnitTest {
 			.andExpect(status().isCreated())
 			.andExpect(content().string("{\"type\":\"Canis\"}"));		
 	}
+	
+	@Test
+	public void catTest() throws Exception {
+		this.mockMvc.perform(post("/test/create/cat").accept(MediaType.APPLICATION_JSON))
+			.andDo(print())
+			.andExpect(status().isNotFound())
+			.andExpect(status().reason("No such Type"));		
+	}	
 
 }
