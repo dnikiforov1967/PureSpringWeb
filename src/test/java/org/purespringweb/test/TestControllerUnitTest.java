@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 /**
  *
@@ -94,5 +95,13 @@ public class TestControllerUnitTest {
 			.andExpect(status().isCreated())
 			.andExpect(content().string("{\"type\":\"Canis\"}"));		
 	}
+        
+	@Test
+	public void catTest() throws Exception {
+		this.mockMvc.perform(post("/test/create/cat").accept(MediaType.APPLICATION_JSON))
+			.andDo(print())
+			.andExpect(status().isNotFound())
+			.andExpect(forwardedUrl("/WEB-INF/views/specialError.jsp"));		
+	}        
 
 }
