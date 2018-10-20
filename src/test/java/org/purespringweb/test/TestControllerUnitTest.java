@@ -28,6 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -94,5 +95,13 @@ public class TestControllerUnitTest {
 			.andExpect(status().isCreated())
 			.andExpect(content().string("{\"type\":\"Canis\"}"));		
 	}
+        
+	@Test
+	public void simpleValidationTest() throws Exception {
+		this.mockMvc.perform(get("/test/validate/simple/dog").accept(MediaType.TEXT_PLAIN))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(content().string("dog"));		
+	}        
 
 }
