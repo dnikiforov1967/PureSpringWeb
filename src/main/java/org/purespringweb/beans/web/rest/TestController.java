@@ -106,5 +106,11 @@ public class TestController {
             throw new NotFoundSuchTypeException();
         }
     }
+    
+    @GetMapping(path="/validate/simple/{val}")
+    @ResponseBody
+    public String validateString(@PathVariable("val") String val) {
+        return val;
+    }
 
 }
